@@ -24,5 +24,5 @@ admin.site.site_title = "Ecommerce Website"
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('home.urls'))
+    path('', include('home.urls')),
 ]

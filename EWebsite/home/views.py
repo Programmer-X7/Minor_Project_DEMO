@@ -1,22 +1,41 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, redirect
+from django.contrib.auth.models import User
+from django.contrib.auth import logout, authenticate, login
+
 
 # Create your views here.
 def index(request):
-    context = {
-        "variable1":"This is sent by",
-        "variable2":"Suman Mondal"
-    }
-    return render(request, 'index.html', context)
-    # return HttpResponse("This is HomePage")
+    if request.user.is_anonymous:
+        return redirect("/login")
+    return render(request, 'index.html')
+
+def loginUser(request):
+    if request.method=="POST":
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        # check if user has entered correct credentials
+        user = authenticate(username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            return redirect("/")
+        
+        else:
+            return render(request, 'login.html')
+
+    return render(request, 'login.html')
+
+def logoutUser(request):
+    logout(request)
+    return redirect("/login")
+
 
 def about(request):
     return render(request, 'about.html')
-    # return HttpResponse("This is AboutPage")
-
+    
 def services(request):
     return render(request, 'services.html')
-    # return HttpResponse("This is ServicesPage")
 
 def contact(request):
     return render(request, 'contact.html')
-    # return HttpResponse("This is ContactPage")
