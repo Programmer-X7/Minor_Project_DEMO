@@ -32,10 +32,16 @@ def logoutUser(request):
 
 
 def about(request):
+    if request.user.is_anonymous:
+        return redirect("/login")
     return render(request, 'about.html')
     
 def services(request):
+    if request.user.is_anonymous:
+        return redirect("/login")
     return render(request, 'services.html')
 
 def contact(request):
+    if request.user.is_anonymous:
+        return redirect("/login")
     return render(request, 'contact.html')
