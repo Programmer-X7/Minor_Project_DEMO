@@ -4,10 +4,12 @@ from home import views
 
 urlpatterns = [
 
-    path('', views.index, name = "home"),       # <-- login / index
+    path('', views.index, name = "home"),
     path('login', views.loginUser, name="login"),
     path('logout', views.logoutUser, name="logout"),
     path('about', views.about, name="about"),
-    path('services', views.services, name="services"),
+    path('pricing', views.pricing, name="pricing"),
+    path('faq', views.faq, name="faq"),
+    path('features', views.features, name="features"),
     path('contact', views.contact, name="contact")
 ]

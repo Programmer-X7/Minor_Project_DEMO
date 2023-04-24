@@ -29,17 +29,26 @@ def loginUser(request):
 def logoutUser(request):
     logout(request)
     return redirect("/login")
+    
+def features(request):
+    if request.user.is_anonymous:
+        return redirect("/login")
+    return render(request, 'features.html')
 
+def pricing(request):
+    if request.user.is_anonymous:
+        return redirect("/login")
+    return render(request, 'pricing.html')
+
+def faq(request):
+    if request.user.is_anonymous:
+        return redirect("/login")
+    return render(request, 'faq.html')
 
 def about(request):
     if request.user.is_anonymous:
         return redirect("/login")
     return render(request, 'about.html')
-    
-def services(request):
-    if request.user.is_anonymous:
-        return redirect("/login")
-    return render(request, 'services.html')
 
 def contact(request):
     if request.user.is_anonymous:
