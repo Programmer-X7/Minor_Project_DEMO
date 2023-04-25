@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import logout, authenticate, login
+from datetime import datetime
+from home.models import Contact
 
 
 # Create your views here.
@@ -51,4 +53,12 @@ def faq(request):
 def contact(request):
     if request.user.is_anonymous:
         return redirect("/login")
+    
+    if request.method == "POST":
+        name = request.POST.get('name')
+        email = request.POST.get('emaildesc')
+        desc = request.POST.get('desc')
+        contact = Contact(name=name, email=email, desc=desc, date=datetime.today())
+        contact.save()
+
     return render(request, 'contact.html')
