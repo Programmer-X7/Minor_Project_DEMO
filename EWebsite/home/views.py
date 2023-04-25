@@ -4,10 +4,6 @@ from django.contrib.auth import logout, authenticate, login
 
 
 # Create your views here.
-def index(request):
-    if request.user.is_anonymous:
-        return redirect("/login")
-    return render(request, 'index.html')
 
 def loginUser(request):
     if request.method=="POST":
@@ -29,11 +25,17 @@ def loginUser(request):
 def logoutUser(request):
     logout(request)
     return redirect("/login")
-    
-def features(request):
+
+
+def index(request):
     if request.user.is_anonymous:
         return redirect("/login")
-    return render(request, 'features.html')
+    return render(request, 'index.html')
+
+def about(request):
+    if request.user.is_anonymous:
+        return redirect("/login")
+    return render(request, 'about.html')
 
 def pricing(request):
     if request.user.is_anonymous:
@@ -45,10 +47,6 @@ def faq(request):
         return redirect("/login")
     return render(request, 'faq.html')
 
-def about(request):
-    if request.user.is_anonymous:
-        return redirect("/login")
-    return render(request, 'about.html')
 
 def contact(request):
     if request.user.is_anonymous:
